@@ -1,10 +1,16 @@
-name: "Periodic quality and security analysis"
+name: "Legacy quality and security analysis"
 
 on:
-  # Every monday at 09:48 UTC
-  schedule:
-    - cron: "48 9 * * 1"
   workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  security-events: write
+
+concurrency:
+  group: legacy-greed-quality
+  cancel-in-progress: true
 
 jobs:
   codeql:
