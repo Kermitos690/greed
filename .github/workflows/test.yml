@@ -1,16 +1,15 @@
-name: "Test suite"
+name: "Legacy test suite"
 
 on:
-  # Modification of a project file in the main branch
-  push:
-    branches:
-      - main
-  # Pull request to the main branch modifying a project file
-  pull_request:
-    branches:
-      - main
-  # Triggered by a new release
+  workflow_dispatch:
   workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: legacy-greed-test-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
